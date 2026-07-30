@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jar of Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fff8f5;
+        --pink: #f8c8dc;
+        --pink-deep: #efa8c4;
+        --cream: #fff4e6;
+        --lavender: #e9d8fd;
+        --white: #ffffff;
+        --ink: #6b4a57;
+        --ink-soft: #9c7c89;
+        --gold: #e8b86d;
+        --shadow: rgba(107, 74, 87, 0.18);
+        --font-title: "Dancing Script", cursive;
+        --font-body: "Poppins", sans-serif;
+      }
+
+      body.night {
+        --bg: #241b3a;
+        --cream: #3a2e52;
+        --pink: #d9a6c2;
+        --lavender: #8b7bc4;
+        --ink: #f3e9f7;
+        --ink-soft: #c9b7da;
+        --shadow: rgba(0, 0, 0, 0.4);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font-body);
+        overflow-x: hidden;
+        transition:
+          background 0.8s ease,
+          color 0.8s ease;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 32px 20px;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 50% 20%,
+            var(--lavender) 0%,
+            transparent 55%
+          ),
+          radial-gradient(circle at 15% 80%, var(--pink) 0%, transparent 45%),
+          radial-gradient(circle at 85% 75%, var(--cream) 0%, transparent 50%),
+          var(--bg);
+      }
+
+      .hero-decor {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .drift {
+        position: absolute;
+        bottom: -10%;
+        font-size: 1.4rem;
+        color: var(--pink-deep);
+        opacity: 0.55;
+        animation: drift linear infinite;
+      }
+      .drift.sparkle {
+        color: var(--gold);
+        font-size: 1rem;
+      }
+      @keyframes drift {
+        0% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.5;
+        }
+        100% {
+          transform: translateY(-115vh) translateX(var(--drift-x, 20px))
+            rotate(25deg);
+          opacity: 0;
+        }
+      }
+
+      .hero-title {
+        font-family: var(--font-title);
+        font-weight: 700;
+        font-size: clamp(3.2rem, 10vw, 6rem);
+        margin: 0;
+        color: var(--ink);
+        text-shadow: 0 2px 24px var(--shadow);
+        position: relative;
+        z-index: 2;
+      }
+      .hero-subtitle {
+        font-family: var(--font-body);
+        font-weight: 300;
+        font-size: clamp(1rem, 2.2vw, 1.25rem);
+        max-width: 480px;
+        line-height: 1.7;
+        margin: 14px 0 40px;
+        color: var(--ink-soft);
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-open-jar {
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 1.05rem;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+        background: linear-gradient(
+          135deg,
+          var(--pink) 0%,
+          var(--lavender) 100%
+        );
+        border: none;
+        padding: 16px 38px;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 10px 30px var(--shadow);
+        animation: bounce 2.6s ease-in-out infinite;
+        position: relative;
+        z-index: 2;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .btn-open-jar:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 14px 36px var(--shadow);
+      }
+      .btn-open-jar:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 3px;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .scroll-hint {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.78rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.6;
+        z-index: 2;
+      }
+
+      /* ---------- JAR SECTION ---------- */
+      .jar-section {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px 50px;
+        text-align: center;
+        position: relative;
+      }
+
+      .jar-hint {
+        font-family: var(--font-body);
+        font-style: italic;
+        font-weight: 300;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        margin: 0 0 18px;
+      }
+
+      .jar-wrapper {
+        position: relative;
+        width: min(340px, 78vw);
+        aspect-ratio: 320 / 420;
+        filter: drop-shadow(0 24px 30px var(--shadow));
+        transform-origin: 50% 92%;
+      }
+      .jar-wrapper.shaking {
+        animation: wiggleJar 0.5s ease;
+      }
+      @keyframes wiggleJar {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        20% {
+          transform: rotate(-4deg);
+        }
+        40% {
+          transform: rotate(3deg);
+        }
+        60% {
+          transform: rotate(-3deg);
+        }
+        80% {
+          transform: rotate(2deg);
+        }
+      }
+
+      .jar-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        display: block;
+      }
+      .jar-layer-back {
+        z-index: 1;
+      }
+      .jar-layer-front {
+        z-index: 3;
+      }
+      .jar-body {
+        transition: opacity 1.1s ease;
+      }
+      .jar-lid {
+        transition:
+          opacity 1.1s ease,
+          transform 0.6s ease;
+        transform-origin: 160px 60px;
+      }
+
+      .heart-glow {
+        opacity: 0;
+        transition: opacity 1.3s ease;
+      }
+      .jar-wrapper.jar-complete .heart-glow {
+        opacity: 1;
+        animation: glowPulse 2.2s ease-in-out infinite;
+      }
+      .jar-wrapper.jar-complete .jar-body,
+      .jar-wrapper.jar-complete .jar-lid {
+        opacity: 0.16;
+      }
+      @keyframes glowPulse {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 10px rgba(232, 184, 109, 0.5));
+        }
+        50% {
+          filter: drop-shadow(0 0 34px rgba(232, 184, 109, 0.95));
+        }
+      }
+
+      .notes-html-container {
+        position: absolute;
+        left: 26.5625%;
+        top: 27.381%;
+        width: 46.875%;
+        height: 58.333%;
+        z-index: 2;
+      }
+
+      .note {
+        position: absolute;
+        width: 24px;
+        height: 18px;
+        margin-left: -12px;
+        margin-top: -9px;
+        background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+        border-radius: 2px;
+        box-shadow:
+          0 2px 5px rgba(107, 74, 87, 0.25),
+          inset 0 0 0 1px rgba(107, 74, 87, 0.06);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          opacity 0.25s ease;
+      }
+      .note::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 10px 8px 0;
+        border-color: transparent rgba(107, 74, 87, 0.12) transparent
+          transparent;
+      }
+      .note:hover {
+        transform: scale(1.18) translateY(-2px) rotate(var(--rot));
+        box-shadow: 0 5px 10px rgba(107, 74, 87, 0.3);
+      }
+      .note:focus-visible {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+      }
+
+      .star-decor {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+      body.night .star-decor {
+        opacity: 1;
+      }
+      .star-dot {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: var(--white);
+        border-radius: 50%;
+        animation: twinkle 2.4s ease-in-out infinite;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.15;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* ---------- PROGRESS ---------- */
+      .progress {
+        margin-top: 26px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+      .progress-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+      .progress-count {
+        font-family: var(--font-title);
+        font-weight: 700;
+        font-size: 2rem;
+        color: var(--ink);
+      }
+      .progress-count.pop {
+        animation: popScale 0.35s ease;
+      }
+      @keyframes popScale {
+        0% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.3);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .btn-final-letter {
+        margin-top: 30px;
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--ink);
+        background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 100%);
+        border: none;
+        padding: 15px 34px;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 10px 28px var(--shadow);
+        opacity: 0;
+        transform: translateY(14px) scale(0.95);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease,
+          box-shadow 0.25s ease;
+      }
+      .btn-final-letter.hidden {
+        display: none;
+      }
+      .btn-final-letter.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .btn-final-letter:hover {
+        box-shadow: 0 14px 34px var(--shadow);
+        transform: translateY(-3px) scale(1.02);
+      }
+
+      .footer-note {
+        margin-top: 56px;
+        font-size: 0.82rem;
+        font-style: italic;
+        color: var(--ink-soft);
+        opacity: 0.7;
+        max-width: 320px;
+      }
+
+      /* ---------- FLYING NOTE / MODAL ---------- */
+      #noteBackdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(107, 74, 87, 0.2);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        z-index: 550;
+      }
+      #noteBackdrop.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .flying-note {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: linear-gradient(160deg, var(--white), var(--cream));
+        border-radius: 16px;
+        box-shadow: 0 20px 50px rgba(107, 74, 87, 0.3);
+        z-index: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 22px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.7s cubic-bezier(0.32, 1.4, 0.44, 1);
+      }
+      .flying-note.closing {
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+        opacity: 0;
+      }
+      .flying-note .note-message {
+        opacity: 0;
+        font-family: var(--font-body);
+        font-weight: 400;
+        color: var(--ink);
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        line-height: 1.65;
+        margin: 0;
+        animation: fadeInUp 0.55s ease forwards 0.05s;
+      }
+      .flying-note .note-hint {
+        opacity: 0;
+        display: block;
+        margin-top: 16px;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        animation: fadeInUp 0.55s ease forwards 0.35s;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .floating-heart {
+        position: fixed;
+        color: var(--pink-deep);
+        font-size: 1.15rem;
+        pointer-events: none;
+        z-index: 590;
+        animation: floatHeart 1.5s ease-out forwards;
+      }
+      @keyframes floatHeart {
+        0% {
+          transform: translate(0, 0) scale(0.6);
+          opacity: 0.95;
+        }
+        100% {
+          transform: translate(var(--dx, 0px), -140px) scale(1.15);
+          opacity: 0;
+        }
+      }
+
+      .sparkle-bit {
+        position: absolute;
+        color: var(--gold);
+        font-size: 0.9rem;
+        pointer-events: none;
+        animation: sparklePop 0.9s ease forwards;
+      }
+      @keyframes sparklePop {
+        0% {
+          transform: scale(0) rotate(0deg);
+          opacity: 1;
+        }
+        55% {
+          transform: scale(1.25) rotate(90deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.7) rotate(180deg);
+          opacity: 0;
+        }
+      }
+
+      /* ---------- FINAL LETTER ---------- */
+      .letter-overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.9s ease,
+          visibility 0s linear 0.9s;
+        z-index: 800;
+      }
+      .letter-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.9s ease;
+      }
+      .letter-card {
+        position: relative;
+        max-width: 560px;
+        width: 100%;
+        background: var(--cream);
+        border-radius: 20px;
+        padding: 52px 44px;
+        box-shadow: 0 26px 70px var(--shadow);
+        font-family: var(--font-title);
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        line-height: 1.85;
+        color: var(--ink);
+        text-align: left;
+      }
+      .letter-greeting {
+        font-size: 1.3em;
+        margin: 0 0 18px;
+      }
+      .letter-card p {
+        margin: 0 0 20px;
+      }
+      .letter-sign {
+        margin-top: 28px !important;
+        font-size: 1.25em;
+      }
+      .letter-close {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(107, 74, 87, 0.08);
+        color: var(--ink);
+        font-size: 1.2rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .letter-close:hover {
+        background: rgba(107, 74, 87, 0.16);
+      }
+
+      /* ---------- SOUND TOGGLE ---------- */
+      .btn-sound {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        background: var(--white);
+        color: var(--ink);
+        font-size: 1.3rem;
+        box-shadow: 0 8px 22px var(--shadow);
+        cursor: pointer;
+        z-index: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+      }
+      .btn-sound.playing {
+        background: var(--pink);
+        animation: spin 6s linear infinite;
+      }
+      .btn-sound:hover {
+        transform: scale(1.08);
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .letter-card {
+          padding: 40px 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HERO -->
+    <header class="hero" id="hero">
+      <div class="hero-decor" id="heroDecor" aria-hidden="true"></div>
+      <h1 class="hero-title">Jar of Love</h1>
+      <p class="hero-subtitle">
+        Every little note is a piece of my heart. Open them whenever you need a
+        smile.
+      </p>
+      <button class="btn-open-jar" id="openJarBtn">Open the Jar</button>
+      <span class="scroll-hint">scroll or tap</span>
+    </header>
+
+    <!-- JAR -->
+    <main class="jar-section" id="jarSection">
+      <p class="jar-hint">tap a note to set it free</p>
+
+      <div class="jar-wrapper" id="jarWrapper">
+        <div class="star-decor" id="starDecor" aria-hidden="true"></div>
+
+        <svg
+          class="jar-layer jar-layer-back"
+          viewBox="0 0 320 420"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="A glass jar filled with folded love notes"
+        >
+          <defs>
+            <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop
+                offset="0%"
+                stop-color="var(--lavender)"
+                stop-opacity="0.38"
+              />
+              <stop offset="55%" stop-color="var(--pink)" stop-opacity="0.22" />
+              <stop
+                offset="100%"
+                stop-color="var(--white)"
+                stop-opacity="0.3"
+              />
+            </linearGradient>
+            <radialGradient id="heartGrad" cx="50%" cy="35%" r="70%">
+              <stop offset="0%" stop-color="var(--gold)" />
+              <stop offset="100%" stop-color="var(--pink-deep)" />
+            </radialGradient>
+          </defs>
+
+          <!-- ground shadow -->
+          <ellipse
+            cx="160"
+            cy="404"
+            rx="78"
+            ry="10"
+            fill="var(--ink)"
+            opacity="0.08"
+          />
+
+          <!-- jar body -->
+          <path
+            id="jarBodyPath"
+            class="jar-body"
+            d="M115,70 C95,70 82,82 80,108 L80,362 C80,388 100,400 125,400 L195,400 C220,400 240,388 240,362 L240,108 C238,82 225,70 205,70 Z"
+            fill="url(#glassGrad)"
+            stroke="rgba(255,255,255,0.65)"
+            stroke-width="2"
+          />
+
+          <!-- completion heart glow -->
+          <path
+            class="heart-glow"
+            fill="url(#heartGrad)"
+            d="M160,250 C120,205 55,215 55,270 C55,320 120,355 160,395 C200,355 265,320 265,270 C265,215 200,205 160,250 Z"
+          />
+        </svg>
+
+        <!-- plain HTML layer for notes, sandwiched between the glass (behind) and the lid/highlights (in front) -->
+        <div class="notes-html-container" id="notesContainer"></div>
+
+        <svg
+          class="jar-layer jar-layer-front"
+          viewBox="0 0 320 420"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="lidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--pink-deep)" />
+              <stop offset="100%" stop-color="var(--pink)" />
+            </linearGradient>
+          </defs>
+
+          <!-- glass highlight streaks, purely decorative -->
+          <path
+            class="jar-highlight"
+            d="M100,120 C96,180 96,300 100,355"
+            fill="none"
+            stroke="rgba(255,255,255,0.55)"
+            stroke-width="10"
+            stroke-linecap="round"
+            opacity="0.5"
+          />
+          <path
+            class="jar-highlight"
+            d="M215,130 C213,200 213,300 216,345"
+            fill="none"
+            stroke="rgba(255,255,255,0.35)"
+            stroke-width="5"
+            stroke-linecap="round"
+            opacity="0.4"
+          />
+
+          <!-- lid -->
+          <g class="jar-lid">
+            <rect
+              x="100"
+              y="24"
+              width="120"
+              height="30"
+              rx="12"
+              fill="url(#lidGrad)"
+            />
+            <rect
+              x="108"
+              y="50"
+              width="104"
+              height="24"
+              rx="7"
+              fill="url(#lidGrad)"
+            />
+            <line
+              x1="106"
+              y1="34"
+              x2="214"
+              y2="34"
+              stroke="rgba(255,255,255,0.4)"
+              stroke-width="2"
+            />
+            <line
+              x1="106"
+              y1="44"
+              x2="214"
+              y2="44"
+              stroke="rgba(0,0,0,0.08)"
+              stroke-width="2"
+            />
+            <path
+              d="M160,64 C156,59 149,59 149,64.5 C149,69 155,72 160,76 C165,72 171,69 171,64.5 C171,59 164,59 160,64 Z"
+              fill="rgba(255,255,255,0.55)"
+            />
+          </g>
+        </svg>
+      </div>
+
+      <div class="progress">
+        <span class="progress-label">Notes Opened</span>
+        <span class="progress-count" id="progressCount"
+          ><span id="openedNum">0</span> /
+          <span id="totalNum">36</span> ❤️</span
+        >
+      </div>
+
+      <button class="btn-final-letter hidden" id="finalLetterBtn">
+        Open My Final Letter
+      </button>
+
+      <p class="footer-note">
+        This jar will always have more love where that came from.
+      </p>
+    </main>
+
+    <div id="noteBackdrop"></div>
+
+    <!-- FINAL LETTER -->
+    <div class="letter-overlay" id="letterOverlay">
+      <div class="letter-card">
+        <button class="letter-close" id="letterClose" aria-label="Close letter">
+          ×
+        </button>
+        <p class="letter-greeting">Dear Love,</p>
+        <p>
+          Every note in this jar is something I wanted you to know. Some are
+          little compliments, some are memories, but they all come from the same
+          place — my heart.
+        </p>
+        <p>
+          Thank you for making my life happier just by being in it. I hope this
+          little website makes you smile whenever you visit it.
+        </p>
+        <p class="letter-sign">Happy Girlfriend Day.<br />I love you. ❤️</p>
+      </div>
+    </div>
+
+    <button class="btn-sound" id="soundBtn" aria-label="Play music">♪</button>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var NOTE_MESSAGES = [
+          "You make ordinary days feel special.",
+          "Your smile is my favorite view.",
+          "I'm lucky I get to call you mine.",
+          "You always know how to make me laugh.",
+          "I still get excited every time I see your name.",
+          "Thank you for existing.",
+          "You're prettier than every sunset I've ever seen.",
+          "Home feels like wherever you are.",
+          "I hope today makes you smile.",
+          "Never forget how amazing you are.",
+          "I love every little thing about you.",
+          "Happy Girlfriend Day ❤️",
+          "Your laugh is my favorite sound in the world.",
+          "I fall for you a little more every day.",
+          "You're the best part of my everyday.",
+          "Even on hard days, thinking of you helps.",
+          "You make my heart feel so full.",
+          "I love how you see the world.",
+          "Being with you feels like coming home.",
+          "You're my favorite person to talk to about nothing.",
+          "I still remember the first time you made me smile.",
+          "You're the calm in every storm.",
+          "Your hugs fix almost everything.",
+          "I love the way you say my name.",
+          "You're kind in a way that inspires me.",
+          "I could listen to you talk for hours.",
+          "You make the little moments feel big.",
+          "I'm so proud of who you are.",
+          "You have the softest heart I know.",
+          "Every love song makes more sense because of you.",
+          "I love your weird little habits too.",
+          "You're my favorite hello and hardest goodbye.",
+          "I hope I make you as happy as you make me.",
+          "You're my person, today and always.",
+          "Thank you for choosing me, every day.",
+          "I love you more than words fit in this tiny note.",
+        ];
+
+        var TOTAL = NOTE_MESSAGES.length;
+        var openedCount = 0;
+        var notesData = [];
+
+        var jarWrapper = document.getElementById("jarWrapper");
+        var notesContainer = document.getElementById("notesContainer");
+        var openedNumEl = document.getElementById("openedNum");
+        var progressCountEl = document.getElementById("progressCount");
+        var finalLetterBtn = document.getElementById("finalLetterBtn");
+        var letterOverlay = document.getElementById("letterOverlay");
+        var letterClose = document.getElementById("letterClose");
+        var noteBackdrop = document.getElementById("noteBackdrop");
+        var openJarBtn = document.getElementById("openJarBtn");
+        var jarSection = document.getElementById("jarSection");
+        var soundBtn = document.getElementById("soundBtn");
+        var heroDecor = document.getElementById("heroDecor");
+        var starDecor = document.getElementById("starDecor");
+
+        document.getElementById("totalNum").textContent = TOTAL;
+
+        /* ---------------- utilities ---------------- */
+        function shuffle(arr) {
+          for (var i = arr.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+          }
+          return arr;
+        }
+
+        function randRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        /* ---------------- hero floating decor ---------------- */
+        function buildHeroDecor() {
+          var glyphs = ["❤", "❤", "✨", "❤", "♡", "✨"];
+          var count = 16;
+          for (var i = 0; i < count; i++) {
+            var el = document.createElement("span");
+            var isSparkle = glyphs[i % glyphs.length] === "✨";
+            el.className = "drift" + (isSparkle ? " sparkle" : "");
+            el.textContent = glyphs[i % glyphs.length];
+            el.style.left = randRange(2, 96) + "%";
+            el.style.setProperty("--drift-x", randRange(-40, 40) + "px");
+            el.style.animationDuration = randRange(9, 17) + "s";
+            el.style.animationDelay = randRange(0, 14) + "s";
+            el.style.fontSize = randRange(0.8, 1.6) + "rem";
+            heroDecor.appendChild(el);
+          }
+        }
+
+        function buildStars() {
+          for (var i = 0; i < 22; i++) {
+            var s = document.createElement("span");
+            s.className = "star-dot";
+            s.style.left = randRange(4, 96) + "%";
+            s.style.top = randRange(4, 96) + "%";
+            s.style.animationDelay = randRange(0, 2.4) + "s";
+            starDecor.appendChild(s);
+          }
+        }
+
+        /* ---------------- night mode ---------------- */
+        (function checkNight() {
+          var hr = new Date().getHours();
+          if (hr >= 20 || hr < 6) {
+            document.body.classList.add("night");
+          }
+        })();
+
+        /* ---------------- build notes ---------------- */
+        function randomNotePosition() {
+          return {
+            left: randRange(6, 94),
+            top: randRange(5, 95),
+            rot: randRange(-22, 22),
+          };
+        }
+
+        function buildNotes() {
+          var order = shuffle(NOTE_MESSAGES.slice());
+          var cols = 6,
+            rows = Math.ceil(TOTAL / cols);
+          var cellW = 100 / cols,
+            cellH = 100 / rows;
+
+          for (var i = 0; i < TOTAL; i++) {
+            var col = i % cols,
+              row = Math.floor(i / cols);
+            var jitterX = randRange(-cellW * 0.32, cellW * 0.32);
+            var jitterY = randRange(-cellH * 0.32, cellH * 0.32);
+            var left = col * cellW + cellW / 2 + jitterX;
+            var top = row * cellH + cellH / 2 + jitterY;
+            var rot = randRange(-22, 22);
+
+            var data = { id: i, message: order[i], opened: false };
+            notesData.push(data);
+
+            var el = document.createElement("div");
+            el.className = "note";
+            el.tabIndex = 0;
+            el.setAttribute("role", "button");
+            el.setAttribute("aria-label", "Open a love note");
+            el.style.left = left + "%";
+            el.style.top = top + "%";
+            el.style.transform = "rotate(" + rot + "deg)";
+            el.dataset.id = i;
+            el.dataset.rot = rot;
+
+            el.addEventListener("click", onNoteActivate);
+            el.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onNoteActivate.call(this, e);
+              }
+            });
+
+            notesContainer.appendChild(el);
+          }
+        }
+
+        function onNoteActivate(e) {
+          e.stopPropagation();
+          if (this.dataset.opening) return;
+          openNote(this);
+        }
+
+        /* ---------------- shake / hearts-burst easter eggs ---------------- */
+        jarWrapper.addEventListener("click", function (e) {
+          if (e.target === jarWrapper || e.target === notesContainer) {
+            shakeJar();
+          }
+        });
+        jarWrapper.addEventListener("dblclick", function (e) {
+          if (e.target === jarWrapper || e.target === notesContainer) {
+            burstHearts();
+          }
+        });
+
+        function shakeJar() {
+          jarWrapper.classList.remove("shaking");
+          void jarWrapper.offsetWidth;
+          jarWrapper.classList.add("shaking");
+
+          var els = notesContainer.querySelectorAll(".note");
+          els.forEach(function (el) {
+            var pos = randomNotePosition();
+            el.style.left = pos.left + "%";
+            el.style.top = pos.top + "%";
+            el.style.transform = "rotate(" + pos.rot + "deg)";
+            el.dataset.rot = pos.rot;
+          });
+        }
+
+        function burstHearts() {
+          var rect = jarWrapper.getBoundingClientRect();
+          spawnHearts(
+            rect.left + rect.width / 2,
+            rect.top + rect.height * 0.55,
+            14,
+          );
+        }
+
+        /* ---------------- open / unfold note ---------------- */
+        function openNote(noteEl) {
+          noteEl.dataset.opening = "1";
+          var id = parseInt(noteEl.dataset.id, 10);
+          var rect = noteEl.getBoundingClientRect();
+          var rot = parseFloat(noteEl.dataset.rot || "0");
+
+          var cardW = Math.min(320, window.innerWidth * 0.86);
+          var cardH = 190;
+          var startScale = Math.max(rect.width, 16) / cardW;
+          var startX = rect.left + rect.width / 2 - cardW / 2;
+          var startY = rect.top + rect.height / 2 - cardH / 2;
+
+          var flyer = document.createElement("div");
+          flyer.className = "flying-note";
+          flyer.style.width = cardW + "px";
+          flyer.style.height = cardH + "px";
+          flyer.style.transform =
+            "translate(" +
+            startX +
+            "px," +
+            startY +
+            "px) scale(" +
+            startScale +
+            ") rotate(" +
+            rot +
+            "deg)";
+          document.body.appendChild(flyer);
+
+          showBackdrop();
+          noteEl.style.opacity = "0";
+          noteEl.style.pointerEvents = "none";
+
+          ensureAudio();
+          playUnfoldSound();
+          spawnHearts(
+            rect.left + rect.width / 2,
+            rect.top + rect.height / 2,
+            6,
+          );
+
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              var targetX = window.innerWidth / 2 - cardW / 2;
+              var targetY = window.innerHeight / 2 - cardH / 2;
+              flyer.style.transform =
+                "translate(" +
+                targetX +
+                "px," +
+                targetY +
+                "px) scale(1) rotate(0deg)";
+            });
+          });
+
+          setTimeout(function () {
+            var msg = document.createElement("p");
+            msg.className = "note-message";
+            msg.textContent = notesData[id].message;
+            var hint = document.createElement("span");
+            hint.className = "note-hint";
+            hint.textContent = "tap to close";
+            flyer.appendChild(msg);
+            flyer.appendChild(hint);
+            spawnSparkles(flyer);
+          }, 680);
+
+          function closeThis() {
+            closeFlyer(flyer);
+          }
+          flyer.addEventListener("click", closeThis);
+          noteBackdrop.addEventListener("click", closeThis, { once: true });
+
+          setTimeout(function () {
+            noteEl.remove();
+          }, 720);
+
+          notesData[id].opened = true;
+          openedCount++;
+          updateCounter();
+
+          if (openedCount >= TOTAL) {
+            setTimeout(unlockFinalLetter, 900);
+          }
+        }
+
+        function closeFlyer(flyer) {
+          if (!flyer || flyer.dataset.closing) return;
+          flyer.dataset.closing = "1";
+          flyer.classList.add("closing");
+          hideBackdrop();
+          setTimeout(function () {
+            flyer.remove();
+          }, 320);
+        }
+
+        function showBackdrop() {
+          noteBackdrop.classList.add("visible");
+        }
+        function hideBackdrop() {
+          noteBackdrop.classList.remove("visible");
+        }
+
+        /* ---------------- floating hearts + sparkles ---------------- */
+        function spawnHearts(x, y, count) {
+          count = count || 6;
+          for (var i = 0; i < count; i++) {
+            (function () {
+              var h = document.createElement("span");
+              h.className = "floating-heart";
+              h.textContent = "❤";
+              h.style.left = x + randRange(-24, 24) + "px";
+              h.style.top = y + "px";
+              h.style.setProperty("--dx", randRange(-50, 50) + "px");
+              h.style.animationDelay = randRange(0, 0.25) + "s";
+              h.style.fontSize = randRange(0.9, 1.5) + "rem";
+              document.body.appendChild(h);
+              h.addEventListener("animationend", function () {
+                h.remove();
+              });
+            })();
+          }
+        }
+
+        function spawnSparkles(container) {
+          container.style.position = "fixed";
+          for (var i = 0; i < 5; i++) {
+            (function () {
+              var s = document.createElement("span");
+              s.className = "sparkle-bit";
+              s.textContent = "✨";
+              s.style.left = randRange(4, 90) + "%";
+              s.style.top = randRange(4, 85) + "%";
+              s.style.animationDelay = randRange(0, 0.4) + "s";
+              container.appendChild(s);
+              s.addEventListener("animationend", function () {
+                s.remove();
+              });
+            })();
+          }
+        }
+
+        /* ---------------- progress ---------------- */
+        function updateCounter() {
+          openedNumEl.textContent = openedCount;
+          progressCountEl.classList.remove("pop");
+          void progressCountEl.offsetWidth;
+          progressCountEl.classList.add("pop");
+        }
+
+        /* ---------------- completion / final letter ---------------- */
+        function unlockFinalLetter() {
+          jarWrapper.classList.add("jar-complete");
+          finalLetterBtn.classList.remove("hidden");
+          requestAnimationFrame(function () {
+            finalLetterBtn.classList.add("show");
+          });
+        }
+
+        finalLetterBtn.addEventListener("click", function () {
+          letterOverlay.classList.add("visible");
+        });
+        letterClose.addEventListener("click", function () {
+          letterOverlay.classList.remove("visible");
+        });
+
+        /* ---------------- scroll from hero ---------------- */
+        openJarBtn.addEventListener("click", function () {
+          jarSection.scrollIntoView({ behavior: "smooth" });
+        });
+
+        /* ---------------- audio: soft paper sound + ambient music ---------------- */
+        var audioCtx = null;
+        var masterGain = null;
+        var musicOn = false;
+
+        function ensureAudio() {
+          if (audioCtx) return;
+          try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0;
+            masterGain.connect(audioCtx.destination);
+
+            var freqs = [261.63, 329.63, 392.0, 523.25];
+            freqs.forEach(function (f, i) {
+              var osc = audioCtx.createOscillator();
+              osc.type = "sine";
+              osc.frequency.value = f;
+              var g = audioCtx.createGain();
+              g.gain.value = 0.4 / (i + 1);
+              var lfo = audioCtx.createOscillator();
+              lfo.frequency.value = 0.12 + i * 0.04;
+              var lfoGain = audioCtx.createGain();
+              lfoGain.gain.value = 0.02;
+              lfo.connect(lfoGain).connect(g.gain);
+              lfo.start();
+              osc.connect(g).connect(masterGain);
+              osc.start();
+            });
+          } catch (err) {
+            audioCtx = null;
+          }
+        }
+
+        function playUnfoldSound() {
+          if (!audioCtx) return;
+          try {
+            var dur = 0.28;
+            var bufferSize = Math.floor(audioCtx.sampleRate * dur);
+            var buffer = audioCtx.createBuffer(
+              1,
+              bufferSize,
+              audioCtx.sampleRate,
+            );
+            var data = buffer.getChannelData(0);
+            for (var i = 0; i < bufferSize; i++) {
+              data[i] =
+                (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
+            }
+            var noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+            var band = audioCtx.createBiquadFilter();
+            band.type = "bandpass";
+            band.frequency.value = 2200;
+            band.Q.value = 0.7;
+            var g = audioCtx.createGain();
+            g.gain.value = 0.1;
+            noise.connect(band).connect(g).connect(audioCtx.destination);
+            noise.start();
+          } catch (err) {
+            /* noop */
+          }
+        }
+
+        soundBtn.addEventListener("click", function () {
+          ensureAudio();
+          if (!audioCtx) return;
+          if (audioCtx.state === "suspended") {
+            audioCtx.resume();
+          }
+          musicOn = !musicOn;
+          var now = audioCtx.currentTime;
+          masterGain.gain.cancelScheduledValues(now);
+          masterGain.gain.linearRampToValueAtTime(
+            musicOn ? 0.05 : 0.0001,
+            now + 1.1,
+          );
+          soundBtn.textContent = musicOn ? "♫" : "♪";
+          soundBtn.classList.toggle("playing", musicOn);
+          soundBtn.setAttribute(
+            "aria-label",
+            musicOn ? "Pause music" : "Play music",
+          );
+        });
+
+        /* ---------------- init ---------------- */
+        buildHeroDecor();
+        buildStars();
+        buildNotes();
+      })();
+    </script>
+  </body>
+</html>
