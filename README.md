@@ -56,4 +56,5 @@ jar-of-love/
 ├── img/
 │   └── flowers.png  # Aesthetic floral decor graphics
 └── music/
-    └── nothing-bruno.mp3  # Soft ambient background music
+    └── heavenly_angel.mp3  # Soft ambient background music
+    └── heavenly_angel1.mp3  # Soft ambient background music
